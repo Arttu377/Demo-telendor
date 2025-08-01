@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telendor - Moderni IT-kumppani</title>
+    <meta name="description" content="Telendor on luotettava ja täsmällinen IT-kumppani digitaalisessa maailmassa. Tarjoamme liittymät, verkkosivut, SEO ja tietoturvapalveluita.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Main Background Image */
+        .main-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 25%, #e9ecef 50%, #dee2e6 75%, #ced4da 100%);
+            z-index: -2;
+        }
+
+        /* Background Pattern */
+        .main-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(173, 216, 230, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(135, 206, 250, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(100, 149, 237, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(70, 130, 180, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Animated Background for Hero */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(45deg, rgba(0, 31, 63, 0.8), rgba(0, 51, 102, 0.8), rgba(0, 64, 128, 0.8), rgba(0, 82, 204, 0.8), rgba(0, 102, 255, 0.8), rgba(26, 117, 255, 0.8));
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-logo {
+            color: #001f3f;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-link {
+            color: #333;
+        }
+
+        .nav-link:hover {
+            color: #0052cc;
+        }
+
+        .navbar.scrolled .nav-link:hover {
+            color: #0052cc;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ac-unit {
+            width: 300px;
+            height: 200px;
+            background: white;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .ac-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 40px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .ac-vents {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 30px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .vent {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .ac-shadow {
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            right: 20px;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f8f9fa;stop-opacity:0.8" /><stop offset="100%" style="stop-color:%23e9ecef;stop-opacity:0.8" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23bg)"/><circle cx="200" cy="150" r="60" fill="%23e3f2fd" opacity="0.6"/><circle cx="1000" cy="200" r="80" fill="%23bbdefb" opacity="0.4"/><circle cx="300" cy="600" r="70" fill="%2390caf9" opacity="0.5"/><circle cx="900" cy="650" r="50" fill="%2364b5f6" opacity="0.3"/><rect x="100" y="300" width="200" height="150" fill="%23f5f5dc" rx="10" opacity="0.7"/><rect x="120" y="320" width="160" height="110" fill="%23ffffff" rx="5" opacity="0.8"/><rect x="140" y="340" width="120" height="70" fill="%231976d2" rx="3" opacity="0.9"/><text x="150" y="375" font-family="Arial" font-size="10" fill="white">IT</text><text x="150" y="390" font-family="Arial" font-size="10" fill="white">Palvelut</text><rect x="400" y="400" width="180" height="120" fill="%23f0f8ff" rx="8" opacity="0.7"/><rect x="420" y="420" width="140" height="80" fill="%23ffffff" rx="4" opacity="0.8"/><text x="430" y="450" font-family="Arial" font-size="8" fill="%23333">Verkkosivut</text><text x="430" y="465" font-family="Arial" font-size="8" fill="%23333">ja SEO</text><rect x="700" y="350" width="160" height="130" fill="%23fff8dc" rx="8" opacity="0.7"/><rect x="720" y="370" width="120" height="90" fill="%23ffffff" rx="4" opacity="0.8"/><text x="730" y="400" font-family="Arial" font-size="8" fill="%23333">Tietoturva</text><text x="730" y="415" font-family="Arial" font-size="8" fill="%23333">ratkaisut</text></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #001f3f;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0052cc, #001f3f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #001f3f;
+            margin-bottom: 1rem;
+        }
+
+                 .service-card p {
+             color: #666;
+             line-height: 1.6;
+         }
+
+         /* Stripe-style Animation Section */
+         .animation-section {
+             padding: 5rem 2rem;
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             position: relative;
+             overflow: hidden;
+         }
+
+         .animation-container {
+             max-width: 1200px;
+             margin: 0 auto;
+             text-align: center;
+             color: white;
+         }
+
+         .animation-title {
+             font-size: 3rem;
+             font-weight: 700;
+             margin-bottom: 1rem;
+             opacity: 0;
+             animation: fadeInUp 1s ease-out forwards;
+         }
+
+         .animation-subtitle {
+             font-size: 1.2rem;
+             margin-bottom: 3rem;
+             opacity: 0.9;
+             opacity: 0;
+             animation: fadeInUp 1s ease-out 0.3s forwards;
+         }
+
+         .floating-cards {
+             display: flex;
+             justify-content: center;
+             gap: 2rem;
+             margin: 3rem 0;
+             flex-wrap: wrap;
+         }
+
+         .floating-card {
+             background: rgba(255, 255, 255, 0.1);
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255, 255, 255, 0.2);
+             border-radius: 15px;
+             padding: 2rem;
+             width: 200px;
+             height: 150px;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             position: relative;
+             animation: float 6s ease-in-out infinite;
+         }
+
+         .floating-card:nth-child(1) { animation-delay: 0s; }
+         .floating-card:nth-child(2) { animation-delay: 1s; }
+         .floating-card:nth-child(3) { animation-delay: 2s; }
+
+         .card-icon {
+             font-size: 2.5rem;
+             margin-bottom: 1rem;
+         }
+
+         .card-title {
+             font-size: 1.1rem;
+             font-weight: 600;
+             margin-bottom: 0.5rem;
+         }
+
+         .card-description {
+             font-size: 0.9rem;
+             opacity: 0.8;
+         }
+
+         @keyframes fadeInUp {
+             from {
+                 opacity: 0;
+                 transform: translateY(30px);
+             }
+             to {
+                 opacity: 1;
+                 transform: translateY(0);
+             }
+         }
+
+         @keyframes float {
+             0%, 100% {
+                 transform: translateY(0px);
+             }
+             50% {
+                 transform: translateY(-20px);
+             }
+         }
+
+         /* Contact Section */
+         .contact-section {
+             padding: 5rem 2rem;
+             background: #f8f9fa;
+             position: relative;
+         }
+
+         .contact-container {
+             max-width: 1200px;
+             margin: 0 auto;
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 4rem;
+             align-items: start;
+         }
+
+         .contact-info h2 {
+             font-size: 0.9rem;
+             font-weight: 500;
+             color: #6c757d;
+             text-transform: uppercase;
+             letter-spacing: 1px;
+             margin-bottom: 1rem;
+         }
+
+         .contact-info h1 {
+             font-size: 2.5rem;
+             font-weight: 700;
+             color: #333;
+             margin-bottom: 1.5rem;
+         }
+
+         .contact-info p {
+             font-size: 1.1rem;
+             color: #666;
+             margin-bottom: 2rem;
+             line-height: 1.6;
+         }
+
+         .benefits-list {
+             list-style: none;
+             padding: 0;
+         }
+
+         .benefits-list li {
+             display: flex;
+             align-items: center;
+             margin-bottom: 1rem;
+             font-size: 1rem;
+             color: #333;
+         }
+
+         .benefits-list li::before {
+             content: "→";
+             margin-right: 1rem;
+             color: #0052cc;
+             font-weight: bold;
+         }
+
+         .contact-form-container {
+             background: white;
+             border-radius: 15px;
+             padding: 2.5rem;
+             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+         }
+
+         .form-title {
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: #333;
+             margin-bottom: 2rem;
+         }
+
+         .form-group {
+             margin-bottom: 1.5rem;
+         }
+
+         .form-group label {
+             display: block;
+             font-size: 0.9rem;
+             font-weight: 500;
+             color: #333;
+             margin-bottom: 0.5rem;
+         }
+
+         .form-group input,
+         .form-group textarea {
+             width: 100%;
+             padding: 0.75rem;
+             border: 1px solid #ddd;
+             border-radius: 8px;
+             font-size: 1rem;
+             transition: border-color 0.3s ease;
+         }
+
+         .form-group input:focus,
+         .form-group textarea:focus {
+             outline: none;
+             border-color: #0052cc;
+         }
+
+         .form-group textarea {
+             resize: vertical;
+             min-height: 100px;
+         }
+
+         .submit-btn {
+             background: #0052cc;
+             color: white;
+             border: none;
+             padding: 1rem 2rem;
+             border-radius: 8px;
+             font-size: 1rem;
+             font-weight: 500;
+             cursor: pointer;
+             transition: background-color 0.3s ease;
+             display: flex;
+             align-items: center;
+             gap: 0.5rem;
+         }
+
+         .submit-btn:hover {
+             background: #003d99;
+         }
+
+        /* Responsive Design */
+                 @media (max-width: 768px) {
+             .nav-menu {
+                 display: none;
+             }
+
+             .hero-container {
+                 grid-template-columns: 1fr;
+                 text-align: center;
+             }
+
+             .hero-content h1 {
+                 font-size: 2.5rem;
+             }
+
+             .services-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .ac-unit {
+                 width: 250px;
+                 height: 170px;
+             }
+
+             .floating-cards {
+                 flex-direction: column;
+                 align-items: center;
+             }
+
+             .contact-container {
+                 grid-template-columns: 1fr;
+                 gap: 2rem;
+             }
+
+             .animation-title {
+                 font-size: 2rem;
+             }
+         }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Background Image -->
+    <div class="main-bg"></div>
+    
+    <!-- Animated Background for Hero -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                Telendor
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Etusivu</a></li>
+                <li><a href="#services" class="nav-link">Palvelut</a></li>
+                <li><a href="#articles" class="nav-link">Artikkeli</a></li>
+                <li><a href="#about" class="nav-link">Meistä</a></li>
+                <li><a href="#contact" class="nav-link">Ota yhteyttä</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Digitaaalisen maailman luotettava kumppani</h1>
+                <p>Olemme luotettava ja täsmällinen kumppani</p>
+            </div>
+            <div class="hero-image">
+                <div class="ac-unit">
+                    <div class="ac-display">20</div>
+                    <div class="ac-vents">
+                        <div class="vent"></div>
+                        <div class="vent"></div>
+                        <div class="vent"></div>
+                        <div class="vent"></div>
+                        <div class="vent"></div>
+                    </div>
+                    <div class="ac-shadow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Palvelumme</h2>
+                <p>Tarjoamme kattavat IT-palvelut yrityksesi tarpeisiin</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        🌐
+                    </div>
+                    <h3>Liittymät kolmessa verkossa</h3>
+                    <p>Luotettavat ja nopeat internet-yhteydet kaikille tarpeisiin. Tarjoamme ratkaisut sekä yrityksille että yksityishenkilöille.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        💻
+                    </div>
+                    <h3>Verkkosivut ja SEO</h3>
+                    <p>Modernit, responsiiviset verkkosivut ja hakukoneoptimointi, jotka auttavat yrityksesi näkyvyydessä digitaalisessa maailmassa.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        🔒
+                    </div>
+                    <h3>Tietoturva</h3>
+                    <p>Kattavat tietoturvaratkaisut, jotka suojaavat yrityksesi tietoja ja järjestelmiä nykypäivän uhkia vastaan.</p>
+                </div>
+            </div>
+                 </div>
+     </section>
+
+     <!-- Stripe-style Animation Section -->
+     <section class="animation-section">
+         <div class="animation-container">
+             <h2 class="animation-title">Digitaalinen innovaatio</h2>
+             <p class="animation-subtitle">Luomme ratkaisuja, jotka kasvavat yrityksesi mukana</p>
+             
+             <div class="floating-cards">
+                 <div class="floating-card">
+                     <div class="card-icon">🚀</div>
+                     <div class="card-title">Nopea toteutus</div>
+                     <div class="card-description">Päivissä, ei kuukausissa</div>
+                 </div>
+                 <div class="floating-card">
+                     <div class="card-icon">⚡</div>
+                     <div class="card-title">Korkea suorituskyky</div>
+                     <div class="card-description">Optimoitu nopeus</div>
+                 </div>
+                 <div class="floating-card">
+                     <div class="card-icon">🛡️</div>
+                     <div class="card-title">Luotettavuus</div>
+                     <div class="card-description">99.9% käytettävyys</div>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+     <!-- Contact Section -->
+     <section id="contact" class="contact-section">
+         <div class="contact-container">
+             <div class="contact-info">
+                 <h2>OTA YHTEYTTÄ</h2>
+                 <h1>Aloitetaan yhteistyö</h1>
+                 <p>Kerro meille projektistasi ja autamme sinua löytämään parhaan ratkaisun.</p>
+                 
+                 <ul class="benefits-list">
+                     <li>Ilmainen konsultaatio</li>
+                     <li>Räätälöidyt ratkaisut</li>
+                     <li>Asiantunteva tuki</li>
+                     <li>Nopea toteutus</li>
+                 </ul>
+             </div>
+             
+             <div class="contact-form-container">
+                 <h3 class="form-title">Varaa konsultaatio</h3>
+                 <form id="contactForm">
+                     <div class="form-group">
+                         <label for="company">Yritys *</label>
+                         <input type="text" id="company" name="company" placeholder="Yrityksen nimi" required>
+                     </div>
+                     
+                     <div class="form-group">
+                         <label for="phone">Puhelinnumero *</label>
+                         <input type="tel" id="phone" name="phone" value="+358 45 121 1663" required>
+                     </div>
+                     
+                     <div class="form-group">
+                         <label for="email">Sähköposti *</label>
+                         <input type="email" id="email" name="email" value="email@yritys.fi" required>
+                     </div>
+                     
+                     <div class="form-group">
+                         <label for="date">Päivämäärä *</label>
+                         <input type="date" id="date" name="date" required>
+                     </div>
+                     
+                     <div class="form-group">
+                         <label for="time">Kellonaika *</label>
+                         <input type="time" id="time" name="time" required>
+                     </div>
+                     
+                     <div class="form-group">
+                         <label for="message">Viesti</label>
+                         <textarea id="message" name="message" placeholder="Voit tähän kertoa hieman yrityksesi tarpeista..."></textarea>
+                     </div>
+                     
+                     <button type="submit" class="submit-btn">
+                         📤 Lähetä
+                     </button>
+                 </form>
+             </div>
+         </div>
+     </section>
+
+     <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+                 // Add scroll effect to navbar
+         window.addEventListener('scroll', function() {
+             const navbar = document.querySelector('.navbar');
+             if (window.scrollY > 50) {
+                 navbar.classList.add('scrolled');
+             } else {
+                 navbar.classList.remove('scrolled');
+             }
+         });
+
+         // Contact form handling
+         document.getElementById('contactForm').addEventListener('submit', function(e) {
+             e.preventDefault();
+             
+             // Get form data
+             const formData = new FormData(this);
+             const data = Object.fromEntries(formData);
+             
+             // Simple validation
+             if (!data.company || !data.phone || !data.email || !data.date || !data.time) {
+                 alert('Täytä kaikki pakolliset kentät');
+                 return;
+             }
+             
+             // Simulate form submission
+             const submitBtn = this.querySelector('.submit-btn');
+             const originalText = submitBtn.innerHTML;
+             submitBtn.innerHTML = '📤 Lähetetään...';
+             submitBtn.disabled = true;
+             
+             setTimeout(() => {
+                 alert('Kiitos! Viestisi on lähetetty. Otamme sinuun yhteyttä pian.');
+                 this.reset();
+                 submitBtn.innerHTML = originalText;
+                 submitBtn.disabled = false;
+             }, 2000);
+         });
+    </script>
+</body>
+</html> 
